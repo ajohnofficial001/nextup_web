@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextUp | Launch Your Career</title>
+    <meta name="description"
+        content="The AI-powered roadmap for freshmen and sophomores to land internships and scholarships.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <img src="assets/nextup_logo.png" alt="NextUp Logo">
+                <span>NextUp<span class="dot">.</span></span>
+            </a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#about">About</a>
+                <a href="#waitlist" class="btn btn-sm">Join Waitlist</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="hero-bg">
+                <div id="stars"></div>
+                <div id="stars2"></div>
+                <div id="stars3"></div>
+            </div>
+            <div class="container hero-content">
+                <h1 class="fade-in">Launch Your Career <br><span class="gradient-text">Before You Graduate</span></h1>
+                <p class="hero-sub fade-in delay-1">The AI-powered roadmap for freshmen and sophomores to land
+                    internships, scholarships, and research opportunities.</p>
+                <div class="hero-cta fade-in delay-2">
+                    <a href="#waitlist" class="btn btn-lg glow">Join the Waitlist</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="scroll-reveal">Everything You Need to <span class="highlight">Succeed</span></h2>
+                    <p class="scroll-reveal">We help you navigate the early years of college so you're ready for the big
+                        leagues.</p>
+                </div>
+                <div class="feature-grid">
+                    <div class="feature-card scroll-reveal">
+                        <div class="icon-box">🗺️</div>
+                        <h3>Automated Roadmap</h3>
+                        <p>Personalized step-by-step guide based on your major and goals. Know exactly what to do next.
+                        </p>
+                    </div>
+                    <div class="feature-card scroll-reveal delay-1">
+                        <div class="icon-box">🚀</div>
+                        <h3>Opportunities Feed</h3>
+                        <p>Curated scholarships, internships, and conferences from top organizations like TMCF and UNCF.
+                        </p>
+                    </div>
+                    <div class="feature-card scroll-reveal delay-2">
+                        <div class="icon-box">⏰</div>
+                        <h3>Deadline Tracker</h3>
+                        <p>Smart reminders ensure you never miss a due date. We track it so you don't have to.</p>
+                    </div>
+                    <div class="feature-card scroll-reveal">
+                        <div class="icon-box">🤖</div>
+                        <h3>AI Career Agent</h3>
+                        <p>Get instant resume feedback, career advice, and job matches 24/7.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container about-container">
+                <div class="about-text scroll-reveal">
+                    <h2>Built for Students, <br>By Students</h2>
+                    <p>College is overwhelming. Finding internships shouldn't be. We built NextUp to level the playing
+                        field and give every freshman and sophomore the tools they need to land their dream opportunity.
+                    </p>
+                    <p>No more guessing. No more missed deadlines. Just a clear path to success.</p>
+                </div>
+                <div class="about-visual scroll-reveal delay-1">
+                    <div class="glass-card">
+                        <div class="stat">
+                            <span class="number">100+</span>
+                            <span class="label">Scholarships</span>
+                        </div>
+                        <div class="stat">
+                            <span class="number">AI</span>
+                            <span class="label">Powered Guidance</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="waitlist" class="waitlist">
+            <div class="container waitlist-content">
+                <h2 class="scroll-reveal">Get Early Access</h2>
+                <p class="scroll-reveal">Be the first to know when we launch. Your future self will thank you.</p>
+                <form id="waitlist-form" class="scroll-reveal delay-1">
+                    <div class="form-group">
+                        <input type="text" id="name" placeholder="Full Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder="School Email (.edu preferred)" required>
+                    </div>
+                    <button type="submit" class="btn btn-lg btn-block">Join the Waitlist</button>
+                </form>
+                <div id="success-message" class="hidden">
+                    <h3>You're on the list! 🚀</h3>
+                    <p>Keep an eye on your inbox.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <img src="assets/nextup_logo.png" alt="NextUp Logo">
+                <span>NextUp<span class="dot">.</span></span>
+            </div>
+            <div class="footer-links">
+                <p>&copy; 2025 NextUp. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
