@@ -44,19 +44,26 @@ This landing page uses Resend for sending confirmation emails to waitlist signup
 ### How It Works
 
 1. **User submits form** → `components/Waitlist.tsx`
+   - Fields: Name, Email, School, Class Year, Major (optional)
 2. **API receives data** → `app/api/waitlist/route.ts`
+   - Validates all required fields
+   - Validates class year against allowed values
 3. **Two emails sent**:
-   - Confirmation to user (beautiful React Email template)
-   - Notification to your team email
+   - Personalized confirmation to user (with their school, class year, and major)
+   - Detailed notification to your team email
 
 ### Features
 
 ✅ Beautiful email templates with React Email
+✅ Comprehensive form with 5 fields (Name, Email, School, Class Year, Major)
 ✅ Email validation
-✅ Loading states
+✅ Class year validation (Freshman, Sophomore, Junior, Senior)
+✅ Loading states with spinner
 ✅ Error handling
-✅ Team notifications
-✅ User confirmation emails
+✅ Team notifications with all user details
+✅ Personalized user confirmation emails
+✅ Responsive grid layout
+✅ Required field indicators
 
 ### Free Tier Limits
 

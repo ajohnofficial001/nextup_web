@@ -4,6 +4,9 @@ import { useState } from "react";
 export default function Waitlist() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [school, setSchool] = useState("");
+  const [classYear, setClassYear] = useState("");
+  const [major, setMajor] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -11,8 +14,8 @@ export default function Waitlist() {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!name.trim() || !email.trim()) {
-      setError("Please enter your name and school email.");
+    if (!name.trim() || !email.trim() || !school.trim() || !classYear) {
+      setError("Please fill in all required fields.");
       return;
     }
 
@@ -25,7 +28,13 @@ export default function Waitlist() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name: name.trim(), email: email.trim() }),
+        body: JSON.stringify({ 
+          name: name.trim(), 
+          email: email.trim(),
+          school: school.trim(),
+          classYear,
+          major: major.trim() || undefined
+        }),
       });
 
       const data = await response.json();
@@ -58,34 +67,91 @@ export default function Waitlist() {
             
             {!submitted ? (
               <form onSubmit={onSubmit} className="space-y-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Full Name <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      id="name"
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="John Doe"
+                      required
+                      className="w-full rounded-xl border-2 border-gray-200 dark:border-gray-600 px-5 py-3.5 text-gray-900 dark:text-white dark:bg-gray-700 placeholder-gray-400 dark:placeholder-gray-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all"
+                      aria-label="Name"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      School Email <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      id="email"
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="you@university.edu"
+                      required
+                      className="w-full rounded-xl border-2 border-gray-200 dark:border-gray-600 px-5 py-3.5 text-gray-900 dark:text-white dark:bg-gray-700 placeholder-gray-400 dark:placeholder-gray-500 focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 transition-all"
+                      aria-label="School email"
+                    />
+                  </div>
+                </div>
+
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Full Name
+                  <label htmlFor="school" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    School/University <span className="text-red-500">*</span>
                   </label>
                   <input
-                    id="name"
+                    id="school"
                     type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="John Doe"
+                    value={school}
+                    onChange={(e) => setSchool(e.target.value)}
+                    placeholder="e.g., Stanford University"
+                    required
                     className="w-full rounded-xl border-2 border-gray-200 dark:border-gray-600 px-5 py-3.5 text-gray-900 dark:text-white dark:bg-gray-700 placeholder-gray-400 dark:placeholder-gray-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all"
-                    aria-label="Name"
+                    aria-label="School or University"
                   />
                 </div>
-                
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    School Email
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="you@university.edu"
-                    className="w-full rounded-xl border-2 border-gray-200 dark:border-gray-600 px-5 py-3.5 text-gray-900 dark:text-white dark:bg-gray-700 placeholder-gray-400 dark:placeholder-gray-500 focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 transition-all"
-                    aria-label="School email"
-                  />
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div>
+                    <label htmlFor="classYear" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Class Year <span className="text-red-500">*</span>
+                    </label>
+                    <select
+                      id="classYear"
+                      value={classYear}
+                      onChange={(e) => setClassYear(e.target.value)}
+                      required
+                      className="w-full rounded-xl border-2 border-gray-200 dark:border-gray-600 px-5 py-3.5 text-gray-900 dark:text-white dark:bg-gray-700 focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 transition-all"
+                      aria-label="Class Year"
+                    >
+                      <option value="">Select your class year</option>
+                      <option value="Freshman">Freshman</option>
+                      <option value="Sophomore">Sophomore</option>
+                      <option value="Junior">Junior</option>
+                      <option value="Senior">Senior</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label htmlFor="major" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Major (Optional)
+                    </label>
+                    <input
+                      id="major"
+                      type="text"
+                      value={major}
+                      onChange={(e) => setMajor(e.target.value)}
+                      placeholder="e.g., Computer Science"
+                      className="w-full rounded-xl border-2 border-gray-200 dark:border-gray-600 px-5 py-3.5 text-gray-900 dark:text-white dark:bg-gray-700 placeholder-gray-400 dark:placeholder-gray-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all"
+                      aria-label="Major"
+                    />
+                  </div>
                 </div>
                 
                 {error && (

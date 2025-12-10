@@ -11,10 +11,16 @@ import {
 
 interface WaitlistConfirmationEmailProps {
   name: string;
+  school: string;
+  classYear: string;
+  major?: string;
 }
 
 export default function WaitlistConfirmationEmail({
   name,
+  school,
+  classYear,
+  major,
 }: WaitlistConfirmationEmailProps) {
   return (
     <Html>
@@ -25,9 +31,9 @@ export default function WaitlistConfirmationEmail({
           <Heading style={h1}>Welcome to NextUp! 🚀</Heading>
           <Text style={text}>Hi {name},</Text>
           <Text style={text}>
-            Thanks for joining the NextUp waitlist! You're one step closer to
-            landing your dream internships, scholarships, and research
-            opportunities.
+            Thanks for joining the NextUp waitlist from <strong>{school}</strong>! As a <strong>{classYear}</strong>
+            {major && ` studying ${major}`}, you're taking the right step toward landing your dream internships, 
+            scholarships, and research opportunities.
           </Text>
           <Text style={text}>
             We're building an AI-powered career roadmap designed specifically

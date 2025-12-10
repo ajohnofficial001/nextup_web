@@ -6,12 +6,12 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
   try {
-    const { name, email } = await request.json();
+    const { name, email, school, classYear, major } = await request.json();
 
     // Validate input
-    if (!name || !email) {
+    if (!name || !email || !school || !classYear) {
       return NextResponse.json(
-        { error: 'Name and email are required' },
+        { error: 'Name, email, school, and class year are required' },
         { status: 400 }
       );
     }
@@ -25,12 +25,21 @@ export async function POST(request: Request) {
       );
     }
 
+    // Class year validation
+    const validClassYears = ['Freshman', 'Sophomore', 'Junior', 'Senior'];
+    if (!validClassYears.includes(classYear)) {
+      return NextResponse.json(
+        { error: 'Invalid class year' },
+        { status: 400 }
+      );
+    }
+
     // Send confirmation email to the user
     const { data: userData, error: userError } = await resend.emails.send({
       from: 'NextUp <waitlist@app-nextup.com>', // Change this to your verified domain
       to: [email],
       subject: 'Welcome to the NextUp Waitlist! 🚀',
-      react: WaitlistConfirmationEmail({ name }),
+      react: WaitlistConfirmationEmail({ name, school, classYear, major }),
     });
 
     if (userError) {
@@ -45,11 +54,14 @@ export async function POST(request: Request) {
     const { data: teamData, error: teamError } = await resend.emails.send({
       from: 'NextUp Waitlist <waitlist@app-nextup.com>', // Change this to your verified domain
       to: [process.env.TEAM_EMAIL || 'jadeyemo004@gmail.com'], // Set this in your .env.local
-      subject: `New Waitlist Signup: ${name}`,
+      subject: `New Waitlist Signup: ${name} (${classYear})`,
       html: `
         <h2>New Waitlist Signup!</h2>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
+        <p><strong>School:</strong> ${school}</p>
+        <p><strong>Class Year:</strong> ${classYear}</p>
+        <p><strong>Major:</strong> ${major || 'Not specified'}</p>
         <p><strong>Date:</strong> ${new Date().toLocaleString()}</p>
       `,
     });
