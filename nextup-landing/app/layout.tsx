@@ -1,8 +1,18 @@
 import type { Metadata } from "next";
+import { Syne, DM_Sans } from "next/font/google";
 import "./globals.css";
-import { Inter } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+const syne = Syne({
+  variable: "--font-syne",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "NextUp | Career Roadmap Mobile App for Students",
@@ -12,28 +22,25 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <head>
         <script
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
-                const theme = localStorage.getItem('theme');
-                const isDark = theme ? theme === 'dark' : true;
-                if (isDark) {
-                  document.documentElement.classList.add('dark');
-                } else {
-                  document.documentElement.classList.remove('dark');
-                }
+                // Force light mode for this design as requested (white theme)
+                 document.documentElement.classList.remove('dark');
               })();
             `,
           }}
         />
       </head>
       <body
-        className={`${inter.className} bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 scroll-smooth transition-colors`}
+        className={`${syne.variable} ${dmSans.variable} antialiased bg-white text-black`}
       >
         {children}
       </body>

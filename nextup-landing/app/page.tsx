@@ -1,8 +1,9 @@
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
-import Features from "../components/Features";
-import Demo from "../components/Demo";
-import About from "../components/About";
+import Marquee from "../components/Marquee";
+import Services from "../components/Services";
+import WhyChooseUs from "../components/WhyChooseUs";
+import Mission from "../components/Mission";
 import Waitlist from "../components/Waitlist";
 import Footer from "../components/Footer";
 
@@ -10,11 +11,12 @@ export default function Page() {
   return (
     <>
       <Navbar />
-      <main>
+      <main className="min-h-screen bg-white overflow-hidden">
         <Hero />
-        <Features />
-        <Demo />
-        <About />
+        <Marquee />
+        <Services />
+        <WhyChooseUs />
+        <Mission />
         <Waitlist />
       </main>
       <Footer />

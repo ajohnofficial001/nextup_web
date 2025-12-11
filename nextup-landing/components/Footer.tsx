@@ -2,25 +2,45 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-3">
-            <Image src="/nextup_logo.png" alt="NextUp logo" width={32} height={32} className="rounded-lg" />
-            <span className="text-lg font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">NextUp</span>
+    <footer className="py-12 border-t border-[#3B28CC]/10 bg-white text-black">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="flex flex-col gap-8">
+          {/* Top Section */}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-3">
+              <Image
+                src="/nextup_logo.png"
+                alt="NextUp Logo"
+                width={32}
+                height={32}
+                className="object-contain rounded-lg"
+              />
+              <div className="flex items-center gap-2">
+                <span className="font-syne text-xl font-bold">
+                  NEXTUP<span className="text-[#3B28CC]">.</span>
+                </span>
+                <span className="text-black/30 text-sm">Career App</span>
+              </div>
+            </div>
+            <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
+              <div className="flex items-center gap-2 text-black/40 text-sm font-dm-sans">
+                <a href="#waitlist" className="hover:text-[#3B28CC] transition-colors">Join Waitlist</a>
+              </div>
+              <div className="flex items-center gap-2 text-black/40 text-sm font-dm-sans">
+                <a href="mailto:support@nextup.com" className="hover:text-[#3B28CC] transition-colors">Contact Support</a>
+              </div>
+            </div>
           </div>
-          
-          <div className="flex items-center gap-6 text-sm text-gray-600 dark:text-gray-400">
-            <a href="#features" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Features</a>
-            <a href="#about" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">About</a>
-            <a href="#waitlist" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Waitlist</a>
+
+          {/* Bottom Section */}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-6 border-t border-[#3B28CC]/5">
+            <p className="text-black/40 text-sm text-center md:text-left font-dm-sans">
+              Built for students, by students.
+            </p>
+            <p className="text-black/40 text-sm font-dm-sans">
+              © {new Date().getFullYear()} NextUp. All rights reserved.
+            </p>
           </div>
-          
-          <p className="text-sm text-gray-500 dark:text-gray-400">© 2025 NextUp. All rights reserved.</p>
-        </div>
-        
-        <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-800 text-center text-sm text-gray-500 dark:text-gray-400">
-          <p>Built with ❤️ for students, by students.</p>
         </div>
       </div>
     </footer>
