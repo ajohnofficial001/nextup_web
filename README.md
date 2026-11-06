@@ -8,7 +8,7 @@ Built with Next.js, TypeScript, Tailwind CSS, React Email, and Resend.
 
 ```bash
 npm install
-npm run dev -- -p 43123
+npm run dev
 ```
 
 Open [http://127.0.0.1:43123](http://127.0.0.1:43123).
@@ -17,9 +17,11 @@ Other scripts:
 
 ```bash
 npm run build   # production build
-npm run start   # serve the production build
+npm run start   # serve the production build (binds 0.0.0.0, uses PORT)
 npm run lint    # ESLint
 ```
+
+On Railway (and similar hosts), keep the start command as `npm start` / `next start`. Do **not** bind to `127.0.0.1` — the platform proxy needs `0.0.0.0` and the injected `PORT`.
 
 ## Waitlist emails (optional)
 
