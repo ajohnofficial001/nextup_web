@@ -2,8 +2,6 @@ import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import WaitlistConfirmationEmail from '../../../emails/WaitlistConfirmation';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request: Request) {
   try {
     const { name, email, school, classYear, major } = await request.json();
@@ -34,9 +32,32 @@ export async function POST(request: Request) {
       );
     }
 
+    const apiKey = process.env.RESEND_API_KEY;
+
+    // Local/dev fallback when Resend is not configured
+    if (!apiKey) {
+      console.info('[waitlist] RESEND_API_KEY missing — accepting signup without sending email', {
+        name,
+        email,
+        school,
+        classYear,
+        major: major || null,
+      });
+      return NextResponse.json(
+        {
+          success: true,
+          message: 'Successfully joined the waitlist!',
+          mock: true,
+        },
+        { status: 200 }
+      );
+    }
+
+    const resend = new Resend(apiKey);
+
     // Send confirmation email to the user
     const { data: userData, error: userError } = await resend.emails.send({
-      from: 'NextUp <waitlist@app-nextup.com>', // Change this to your verified domain
+      from: 'NextUp <waitlist@app-nextup.com>',
       to: [email],
       subject: 'Welcome to the NextUp Waitlist! 🚀',
       react: WaitlistConfirmationEmail({ name, school, classYear, major }),
@@ -51,9 +72,9 @@ export async function POST(request: Request) {
     }
 
     // Send notification to your team
-    const { data: teamData, error: teamError } = await resend.emails.send({
-      from: 'NextUp Waitlist <waitlist@app-nextup.com>', // Change this to your verified domain
-      to: [process.env.TEAM_EMAIL || 'jadeyemo004@gmail.com'], // Set this in your .env.local
+    const { error: teamError } = await resend.emails.send({
+      from: 'NextUp Waitlist <waitlist@app-nextup.com>',
+      to: [process.env.TEAM_EMAIL || 'jadeyemo004@gmail.com'],
       subject: `New Waitlist Signup: ${name} (${classYear})`,
       html: `
         <h2>New Waitlist Signup!</h2>
@@ -72,10 +93,10 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json(
-      { 
-        success: true, 
+      {
+        success: true,
         message: 'Successfully joined the waitlist!',
-        data: userData 
+        data: userData,
       },
       { status: 200 }
     );
